@@ -27,10 +27,12 @@ require 'zakkistore-sdk'
 
 # Inisialisasi klien SDK
 zakki = ZakkiStore.new(
-  token: "API_TOKEN_ANDA",
-  iduser: "IBO99",
-  pin: "123456",          # Wajib untuk tabung & tarik
-  auto_withdraw: true      # Aktifkan penarikan saldo VA otomatis ke aplikasi!
+  "https://qris.zakki.store", # URL API Server
+  "API_TOKEN_ANDA",          # Token API
+  "IBO99",                   # iduser
+  "member@gmail.com",        # email
+  "123456",                  # PIN transaksi (Wajib untuk tabung & tarik)
+  true                       # Aktifkan penarikan saldo VA otomatis ke aplikasi!
 )
 ```
 
