@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'zakkistore-sdk'
-  s.version     = '1.0.1'
+  s.version     = '1.0.3'
   s.summary     = 'Official Ruby SDK Client Library for Zakki Store B2B API Gateway'
   s.description = 'Mempermudah integrasi layanan gerbang pembayaran (Payment Gateway) QRIS dan H2H Zakki Store.'
   s.authors     = ['ZakkiXD']

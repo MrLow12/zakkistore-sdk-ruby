@@ -216,17 +216,44 @@ class ZakkiStore
   # --- 5. REWARD KOMPUTASI & UTILITY ---
   # ==========================================================
 
-  def cekmining
-    _request('/cekmining', 'GET', { "token" => @token })
+  def cekmining(idmining)
+    raise ArgumentError, "Parameter idmining wajib diisi." if idmining.nil? || idmining.empty?
+    _request('/cekmining', 'GET', { "idmining" => idmining.to_s.strip })
   end
 
   def mymining
     _request('/mymining', 'GET', { "token" => @token })
   end
 
+  def mining_start
+    _request('/mining/start', 'GET', { "token" => @token })
+  end
+
+  def miningStart
+    mining_start
+  end
+
+  def mining_submit(nonce, signature)
+    raise ArgumentError, "Parameter nonce wajib disertakan." if nonce.nil?
+    raise ArgumentError, "Parameter signature wajib disertakan." if signature.nil? || signature.empty?
+    _request('/mining/submit', 'POST', {
+      "token" => @token,
+      "nonce" => nonce,
+      "signature" => signature
+    })
+  end
+
+  def miningSubmit(nonce, signature)
+    mining_submit(nonce, signature)
+  end
+
   def cekgacha
     _request('/cekgacha', 'GET', { "token" => @token })
   end
+
+  # ==========================================================
+  # --- 6. UTILITY & SECURITY ---
+  # ==========================================================
 
   def whitelistip(ip)
     _request('/whitelistip', 'POST', {
@@ -251,6 +278,91 @@ class ZakkiStore
 
   def status
     _request('/status', 'GET')
+  end
+
+  # ==========================================================
+  # --- 7. METODE INTEGRASI BARU ---
+  # ==========================================================
+
+  def set_callback(site)
+    _request('/setcallback', 'GET', {
+      "token" => @token,
+      "site" => site.to_s.strip
+    })
+  end
+
+  def setcallback(site)
+    set_callback(site)
+  end
+
+  def del_callback
+    _request('/delcallback', 'GET', { "token" => @token })
+  end
+
+  def delcallback
+    del_callback
+  end
+
+  def set_notif_bot(telegram_id)
+    _request('/setnotifbot', 'GET', {
+      "token" => @token,
+      "id" => telegram_id.to_s.strip
+    })
+  end
+
+  def setnotifbot(telegram_id)
+    set_notif_bot(telegram_id)
+  end
+
+  def del_notif_bot
+    _request('/delnotifbot', 'GET', { "token" => @token })
+  end
+
+  def delnotifbot
+    del_notif_bot
+  end
+
+  def check_transfer(idtransfer)
+    _request('/checktransfer', 'GET', { "idtransfer" => idtransfer.to_s.strip })
+  end
+
+  def checktransfer(idtransfer)
+    check_transfer(idtransfer)
+  end
+
+  def my_transfer(transfer_type = "all")
+    _request('/mytransfer', 'GET', {
+      "token" => @token,
+      "type" => transfer_type.to_s.strip
+    })
+  end
+
+  def mytransfer(transfer_type = "all")
+    my_transfer(transfer_type)
+  end
+
+  def my_topup
+    _request('/mytopup', 'GET', { "token" => @token })
+  end
+
+  def mytopup
+    my_topup
+  end
+
+  def cek_my_ip
+    _request('/cekmyip', 'GET')
+  end
+
+  def cekmyip
+    cek_my_ip
+  end
+
+  def cek_ip(ip)
+    _request('/cekip', 'GET', { "ip" => ip.to_s.strip })
+  end
+
+  def cekip(ip)
+    cek_ip(ip)
   end
 
   private
