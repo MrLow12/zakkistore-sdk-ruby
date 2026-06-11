@@ -48,6 +48,10 @@ class ZakkiStore
     })
   end
 
+  def cektopup2(idtopup)
+    "#{@base_url}/cektopup2?idtopup=#{URI.encode_www_form_component(idtopup)}"
+  end
+
   def cancel(id_transaksi = nil, all_pending = false)
     if id_transaksi.is_a?(TrueClass) || id_transaksi.is_a?(FalseClass)
       all_pending = id_transaksi
